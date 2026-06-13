@@ -32,21 +32,19 @@ const sidebarItems = [
 
 const Sidebar = (): React.JSX.Element => {
   return (
-    <aside className="col-span-1 h-full">
-      <div className="flex flex-col gap-6 p-4 w-fit h-full bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
-        {sidebarItems.map((item) => {
-          const Icon = item.icon;
+    <aside className="flex flex-col gap-6 p-4 w-fit h-full bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
+      {sidebarItems.map((item) => {
+        const Icon = item.icon;
 
-          return (
-            <Tooltip key={item.name}>
-              <TooltipTrigger>
-                <Icon className="size-5" />
-              </TooltipTrigger>
-              <TooltipContent side="right">{item.name}</TooltipContent>
-            </Tooltip>
-          );
-        })}
-      </div>
+        return (
+          <Tooltip key={item.name}>
+            <TooltipTrigger>
+              <Icon className="size-5" />
+            </TooltipTrigger>
+            <TooltipContent side="right">{item.name}</TooltipContent>
+          </Tooltip>
+        );
+      })}
     </aside>
   );
 };
