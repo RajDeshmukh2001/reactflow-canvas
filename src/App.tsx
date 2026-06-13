@@ -1,12 +1,11 @@
-import type React from 'react'
+import React from 'react';
 import './App.css';
+import AppLayout from '@/components/layout/AppLayout';
 
 const App = (): React.JSX.Element => {
   return (
-    <div className="dot-grid min-h-screen">
-      <h1>ReactFlow Canvas</h1>
-    </div>
-  )
-}
+    <AppLayout />
+  );
+};
 
-export default App
+export default App;
