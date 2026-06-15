@@ -7,3 +7,5 @@ export type NodeMetric = {
   icon: LucideIcon;
   value: number;
 };
+
+export type ServiceStatus = 'Healthy' | 'Degraded' | 'Down';

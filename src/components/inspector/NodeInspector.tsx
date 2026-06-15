@@ -1,5 +1,6 @@
 import React from 'react';
 import MetricTabs from './MetricTabs';
+import StatusBadge from './StatusBadge';
 import ServiceHeader from './ServiceHeader';
 import { SiPostgresql } from 'react-icons/si';
 import { nodeMetrics } from '@/data/nodeMetrics';
@@ -13,6 +14,8 @@ const NodeInspector = (): React.JSX.Element => {
         <ServiceHeader name="PostgreSQL" icon={SiPostgresql} />
 
         <MetricTabs nodeMetrics={nodeMetrics} />
+
+        <StatusBadge status="Healthy" />
       </div>
     </section>
   );
