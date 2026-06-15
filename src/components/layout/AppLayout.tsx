@@ -12,7 +12,10 @@ const AppLayout = (): React.JSX.Element => {
       <div className="flex flex-1 justify-between h-full">
         <Sidebar />
         <GraphCanvas />
-        <RightPanel />
+
+        <div className="hidden md:block flex-3 h-full">
+          <RightPanel />
+        </div>
       </div>
     </div>
   );
