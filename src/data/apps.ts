@@ -1,4 +1,6 @@
-export const apps = [
+import type { App } from '@/types/app';
+
+export const apps: App[] = [
   {
     id: '7aee1c95-544d-45cc-a008-7e8c9b0123bf',
     name: 'supertokens-golang',
