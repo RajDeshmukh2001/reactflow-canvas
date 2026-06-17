@@ -1,17 +1,17 @@
 import React from 'react';
 import MetricControl from './MetricControl';
-import type { NodeMetric } from '@/types/node';
+import type { MetricDefinition } from '@/types/node';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type MetricTabsProps = {
-  nodeMetrics: NodeMetric[];
+  metricDefinitions: MetricDefinition[];
 };
 
-const MetricTabs = ({ nodeMetrics }: MetricTabsProps): React.JSX.Element => {
+const MetricTabs = ({ metricDefinitions }: MetricTabsProps): React.JSX.Element => {
   return (
     <Tabs defaultValue="cpu">
       <TabsList className="w-full border dark:border-0 mb-4">
-        {nodeMetrics.map((metric) => {
+        {metricDefinitions.map((metric) => {
           const Icon = metric.icon;
 
           return (
@@ -23,9 +23,9 @@ const MetricTabs = ({ nodeMetrics }: MetricTabsProps): React.JSX.Element => {
         })}
       </TabsList>
 
-      {nodeMetrics.map((metric) => (
+      {metricDefinitions.map((metric) => (
         <TabsContent key={metric.id} value={metric.key}>
-          <MetricControl value={metric.value} />
+          <MetricControl value={75} />
         </TabsContent>
       ))}
     </Tabs>

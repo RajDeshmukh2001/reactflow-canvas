@@ -3,7 +3,7 @@ import MetricTabs from './MetricTabs';
 import StatusBadge from './StatusBadge';
 import ServiceHeader from './ServiceHeader';
 import { SiPostgresql } from 'react-icons/si';
-import { nodeMetrics } from '@/data/nodeMetrics';
+import { metricDefinitions } from '@/data/metricDefinition';
 import { useAppStore } from '@/store';
 
 const NodeInspector = (): React.JSX.Element => {
@@ -17,11 +17,13 @@ const NodeInspector = (): React.JSX.Element => {
         {selectedNodeId ? (
           <>
             <ServiceHeader name="PostgreSQL" icon={SiPostgresql} />
-            <MetricTabs nodeMetrics={nodeMetrics} />
+            <MetricTabs metricDefinitions={metricDefinitions} />
             <StatusBadge status="Healthy" />
           </>
         ) : (
-          <p className="text-sm text-center text-muted-foreground">Select a node to view its details</p>
+          <p className="text-sm text-center text-muted-foreground">
+            Select a node to view its details
+          </p>
         )}
       </div>
     </section>
