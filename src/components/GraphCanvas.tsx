@@ -63,6 +63,8 @@ const GraphCanvas = (): React.JSX.Element => {
         onPaneClick={() => setSelectedNodeId(null)}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        deleteKeyCode={['Backspace', 'Delete']}
+        onNodesDelete={() => setSelectedNodeId(null)}
         fitView
       >
         <Background />
