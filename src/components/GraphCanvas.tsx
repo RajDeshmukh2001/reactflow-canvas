@@ -1,10 +1,18 @@
-import React from 'react';
 import { useAppStore } from '@/store';
 import useGraph from '@/hooks/useGraph';
+import React, { useEffect } from 'react';
 import { useTheme } from './theme-provider';
 import { Button } from '@/components/ui/button';
+import type { ServiceNode } from '@/types/node';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ReactFlow, Background, Controls } from '@xyflow/react';
+import {
+  ReactFlow,
+  Background,
+  Controls,
+  useNodesState,
+  useEdgesState,
+  type Edge,
+} from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
 
@@ -14,8 +22,15 @@ const GraphCanvas = (): React.JSX.Element => {
   const { theme } = useTheme();
 
   const { data: selectedGraph, isPending, isError, refetch } = useGraph(selectedAppId);
-  const nodes = selectedGraph?.nodes ?? [];
-  const edges = selectedGraph?.edges ?? [];
+  const [nodes, setNodes, onNodesChange] = useNodesState<ServiceNode>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
+
+  useEffect(() => {
+    if (!selectedGraph) return;
+
+    setNodes(selectedGraph.nodes);
+    setEdges(selectedGraph.edges);
+  }, [selectedGraph, setNodes, setEdges]);
 
   if (isPending && selectedAppId) {
     return (
@@ -46,6 +61,8 @@ const GraphCanvas = (): React.JSX.Element => {
         edges={edges}
         onNodeClick={(_, node) => setSelectedNodeId(node.id)}
         onPaneClick={() => setSelectedNodeId(null)}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         fitView
       >
         <Background />

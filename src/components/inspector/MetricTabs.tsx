@@ -11,7 +11,7 @@ type MetricTabsProps = {
 const MetricTabs = ({ metricDefinitions, metrics }: MetricTabsProps): React.JSX.Element => {
   return (
     <Tabs defaultValue="cpu">
-      <TabsList className="w-full border dark:border-0 mb-4">
+      <TabsList className="w-full border dark:border-0 mb-4 overflow-x-auto no-scrollbar">
         {metricDefinitions.map((metric) => {
           const Icon = metric.icon;
 
