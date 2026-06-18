@@ -12,6 +12,8 @@ import '@xyflow/react/dist/style.css';
 const GraphCanvas = (): React.JSX.Element => {
   const selectedAppId = useAppStore((state) => state.selectedAppId);
   const setSelectedNodeId = useAppStore((state) => state.setSelectedNodeId);
+  const setMobilePanelOpen = useAppStore((state) => state.setMobilePanelOpen);
+
   const { theme } = useTheme();
 
   const { data: selectedGraph, isPending, isError, refetch } = useGraph(selectedAppId);
@@ -26,6 +28,14 @@ const GraphCanvas = (): React.JSX.Element => {
     setNodes(selectedGraph.nodes);
     setEdges(selectedGraph.edges);
   }, [selectedGraph, setNodes, setEdges]);
+
+  const handleNodeClick = (nodeId: string) => {
+    setSelectedNodeId(nodeId);
+
+    if (window.innerWidth < 768) {
+      setMobilePanelOpen(true);
+    }
+  };
 
   const handleOnNodeDelete = (deletedNodes: ServiceNode[]) => {
     const deletedIds = deletedNodes.map((node) => node.id);
@@ -67,7 +77,7 @@ const GraphCanvas = (): React.JSX.Element => {
         colorMode={theme}
         nodes={nodes}
         edges={edges}
-        onNodeClick={(_, node) => setSelectedNodeId(node.id)}
+        onNodeClick={(_, node) => handleNodeClick(node.id)}
         onPaneClick={() => setSelectedNodeId(null)}
         onNodesChange={(changes) => setNodes(applyNodeChanges(changes, nodes))}
         onEdgesChange={(changes) => setEdges(applyEdgeChanges(changes, edges))}

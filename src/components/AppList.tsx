@@ -8,12 +8,21 @@ const AppList = (): React.JSX.Element => {
   const { data: apps, isPending, isError, refetch } = useApps();
   const selectedAppId = useAppStore((state) => state.selectedAppId);
   const setSelectedAppId = useAppStore((state) => state.setSelectedAppId);
+  const setMobilePanelOpen = useAppStore((state) => state.setMobilePanelOpen);
 
   useEffect(() => {
     if (!selectedAppId && apps?.length) {
       setSelectedAppId(apps[0].id);
     }
   }, [apps, selectedAppId, setSelectedAppId]);
+
+  const handleAppSelect = (appId: string) => {
+    setSelectedAppId(appId);
+
+    if (window.innerWidth < 768) {
+      setMobilePanelOpen(false);
+    }
+  };
 
   return (
     <section className="flex flex-1 flex-col min-h-0 p-4">
@@ -41,7 +50,7 @@ const AppList = (): React.JSX.Element => {
           <div
             key={app.id}
             className={`flex items-center gap-2 rounded hover:bg-sidebar-accent cursor-pointer p-2 transition-colors duration-250 ease-in-out ${selectedAppId === app.id ? 'bg-sidebar-accent border' : 'bg-transparent'}`}
-            onClick={() => setSelectedAppId(app.id)}
+            onClick={() => handleAppSelect(app.id)}
           >
             <div className="w-5 h-5 rounded" style={{ backgroundColor: app.logoColor }} />
             <h4 className="text-sm font-medium">{app.name}</h4>
