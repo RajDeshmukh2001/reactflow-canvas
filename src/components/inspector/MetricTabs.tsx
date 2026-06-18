@@ -1,14 +1,19 @@
 import React from 'react';
 import MetricControl from './MetricControl';
-import type { MetricDefinition, NodeMetrics } from '@/types/node';
+import type { MetricDefinition, MetricKey, NodeMetrics } from '@/types/node';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type MetricTabsProps = {
   metricDefinitions: MetricDefinition[];
   metrics: NodeMetrics;
+  onMetricChange: (metricKey: MetricKey, value: number) => void;
 };
 
-const MetricTabs = ({ metricDefinitions, metrics }: MetricTabsProps): React.JSX.Element => {
+const MetricTabs = ({
+  metricDefinitions,
+  metrics,
+  onMetricChange,
+}: MetricTabsProps): React.JSX.Element => {
   return (
     <Tabs defaultValue="cpu">
       <TabsList className="w-full border dark:border-0 mb-4 overflow-x-auto no-scrollbar">
@@ -24,14 +29,14 @@ const MetricTabs = ({ metricDefinitions, metrics }: MetricTabsProps): React.JSX.
         })}
       </TabsList>
 
-      {metricDefinitions.map((metric) => {
-        const m = metrics[metric.key];
-        return (
-          <TabsContent key={metric.id} value={metric.key}>
-            <MetricControl value={m} />
-          </TabsContent>
-        );
-      })}
+      {metricDefinitions.map((metric) => (
+        <TabsContent key={metric.id} value={metric.key}>
+          <MetricControl
+            value={metrics[metric.key]}
+            onChange={(value) => onMetricChange(metric.key, value)}
+          />
+        </TabsContent>
+      ))}
     </Tabs>
   );
 };

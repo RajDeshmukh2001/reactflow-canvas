@@ -4,14 +4,21 @@ import StatusBadge from './StatusBadge';
 import ServiceHeader from './ServiceHeader';
 import { metricDefinitions } from '@/data/metricDefinition';
 import { useAppStore } from '@/store';
-import useGraph from '@/hooks/useGraph';
+import type { MetricKey } from '@/types/node';
 
 const NodeInspector = (): React.JSX.Element => {
-  const selectedAppId = useAppStore((state) => state.selectedAppId);
+  const nodes = useAppStore((state) => state.nodes);
   const selectedNodeId = useAppStore((state) => state.selectedNodeId);
 
-  const { data: selectedGraph } = useGraph(selectedAppId);
-  const selectedNode = selectedGraph?.nodes.find((node) => node.id === selectedNodeId);
+  const selectedNode = nodes.find((node) => node.id === selectedNodeId);
+
+  const updateNodeMetric = useAppStore((state) => state.updateNodeMetric);
+
+  const handleMetricChange = (metricKey: MetricKey, value: number) => {
+    if (!selectedNode) return;
+
+    updateNodeMetric(selectedNode.id, metricKey, value);
+  };
 
   return (
     <section className="flex-1 p-4">
@@ -21,7 +28,11 @@ const NodeInspector = (): React.JSX.Element => {
         {selectedNode ? (
           <>
             <ServiceHeader label={selectedNode.data.label} logo={selectedNode.data.logoUrl} />
-            <MetricTabs metricDefinitions={metricDefinitions} metrics={selectedNode.data.metrics} />
+            <MetricTabs
+              metricDefinitions={metricDefinitions}
+              metrics={selectedNode.data.metrics}
+              onMetricChange={handleMetricChange}
+            />
             <StatusBadge status={selectedNode.data.status} />
           </>
         ) : (

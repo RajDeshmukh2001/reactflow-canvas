@@ -4,13 +4,26 @@ import { Slider } from '@/components/ui/slider';
 
 type MetricControlProps = {
   value: number;
+  onChange: (value: number) => void;
 };
 
-const MetricControl = ({ value }: MetricControlProps): React.JSX.Element => {
+const MetricControl = ({ value, onChange }: MetricControlProps): React.JSX.Element => {
   return (
     <div className="flex items-center gap-4">
-      <Slider value={[value]} max={100} step={1} className="w-full" />
-      <Input type="number" value={value} className="w-20" />
+      <Slider
+        value={[value]}
+        onValueChange={(value) => onChange(value[0])}
+        max={100}
+        step={1}
+        className="w-full"
+      />
+
+      <Input
+        type="number"
+        onChange={(e) => onChange(Number(e.target.value))}
+        value={value}
+        className="w-20"
+      />
     </div>
   );
 };
