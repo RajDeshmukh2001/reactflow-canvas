@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppStore } from '@/store';
 import useApps from '@/hooks/useApps';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,12 @@ const AppList = (): React.JSX.Element => {
   const { data: apps, isPending, isError, refetch } = useApps();
   const selectedAppId = useAppStore((state) => state.selectedAppId);
   const setSelectedAppId = useAppStore((state) => state.setSelectedAppId);
+
+  useEffect(() => {
+    if (!selectedAppId && apps?.length) {
+      setSelectedAppId(apps[0].id);
+    }
+  }, [apps, selectedAppId, setSelectedAppId]);
 
   return (
     <section className="flex flex-1 flex-col min-h-0 p-4">
