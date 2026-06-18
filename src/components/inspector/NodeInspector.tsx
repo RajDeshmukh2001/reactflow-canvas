@@ -24,7 +24,15 @@ const NodeInspector = (): React.JSX.Element => {
     <section className="flex-1 p-4">
       <h3 className="mb-4 font-medium">Service Node</h3>
 
-      <div className="space-y-6 p-4 bg-sidebar border border-sidebar-border rounded-md">
+      <div
+        className={`space-y-6 p-4 bg-sidebar rounded-md ${
+          selectedNode?.data.type === 'database'
+            ? 'border-2 border-emerald-500'
+            : selectedNode?.data.type === 'service'
+              ? 'border-2 border-blue-500'
+              : 'border border-sidebar-border'
+        }`}
+      >
         {selectedNode ? (
           <>
             <ServiceHeader label={selectedNode.data.label} logo={selectedNode.data.logoUrl} />
@@ -41,6 +49,20 @@ const NodeInspector = (): React.JSX.Element => {
           </p>
         )}
       </div>
+
+      {selectedNode && (
+        <div className="flex items-center justify-end gap-6 text-[11px] mt-2">
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded bg-blue-500" />
+            <span>Service</span>
+          </div>
+
+          <div className="flex items-center gap-2 mt-1">
+            <span className="h-3 w-3 rounded bg-emerald-500" />
+            <span>Database</span>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

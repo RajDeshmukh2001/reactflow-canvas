@@ -14,9 +14,11 @@ export type MetricDefinition = {
 
 export type NodeMetrics = Record<MetricKey, number>;
 
+export type NodeType = 'service' | 'database';
+
 export type ServiceNodeData = {
   label: string;
-  serviceType: string;
+  type: NodeType;
   logoUrl: string;
   status: ServiceStatus;
   description?: string;

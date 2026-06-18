@@ -10,7 +10,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 250, y: 50 },
         data: {
           label: 'Backend',
-          serviceType: 'backend',
+          type: 'service',
           logoUrl: 'https://cdn.simpleicons.org/go/00ADD8',
           status: 'Healthy',
           metrics: { cpu: 70, memory: 55, disk: 40, region: 1 },
@@ -22,7 +22,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 100, y: 250 },
         data: {
           label: 'PostgreSQL',
-          serviceType: 'postgres',
+          type: 'database',
           logoUrl: 'https://cdn.simpleicons.org/postgresql/4169E1',
           status: 'Healthy',
           metrics: { cpu: 75, memory: 62, disk: 48, region: 1 },
@@ -33,7 +33,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 400, y: 250 },
         data: {
           label: 'Redis',
-          serviceType: 'redis',
+          type: 'service',
           logoUrl: 'https://cdn.simpleicons.org/redis/DC382D',
           status: 'Degraded',
           metrics: { cpu: 85, memory: 90, disk: 20, region: 60 },
@@ -63,7 +63,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 250, y: 50 },
         data: {
           label: 'Backend',
-          serviceType: 'backend',
+          type: 'service',
           logoUrl: 'https://cdn.simpleicons.org/ruby/CC342D',
           status: 'Healthy',
           metrics: { cpu: 55, memory: 40, disk: 30, region: 2 },
@@ -74,7 +74,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 100, y: 250 },
         data: {
           label: 'MySQL',
-          serviceType: 'mysql',
+          type: 'database',
           logoUrl: 'https://cdn.simpleicons.org/mysql/4479A1',
           status: 'Down',
           metrics: { cpu: 95, memory: 88, disk: 92, region: 5 },
@@ -85,7 +85,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 400, y: 250 },
         data: {
           label: 'Redis',
-          serviceType: 'redis',
+          type: 'service',
           logoUrl: 'https://cdn.simpleicons.org/redis/DC382D',
           status: 'Healthy',
           metrics: { cpu: 30, memory: 35, disk: 15, region: 4 },
@@ -115,7 +115,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 250, y: 50 },
         data: {
           label: 'Backend',
-          serviceType: 'backend',
+          type: 'service',
           logoUrl: 'https://cdn.simpleicons.org/python/3776AB',
           status: 'Healthy',
           metrics: { cpu: 60, memory: 50, disk: 40, region: 25 },
@@ -126,7 +126,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 100, y: 250 },
         data: {
           label: 'PostgreSQL',
-          serviceType: 'postgres',
+          type: 'database',
           logoUrl: 'https://cdn.simpleicons.org/postgresql/4169E1',
           status: 'Healthy',
           metrics: { cpu: 35, memory: 45, disk: 60, region: 10 },
@@ -137,7 +137,7 @@ export const appGraphs: AppGraph[] = [
         position: { x: 400, y: 250 },
         data: {
           label: 'MongoDB',
-          serviceType: 'mongo',
+          type: 'database',
           logoUrl: 'https://cdn.simpleicons.org/mongodb/47A248',
           status: 'Down',
           metrics: { cpu: 45, memory: 50, disk: 55, region: 18 },
