@@ -16,7 +16,9 @@ type AppStore = {
   setSelectedAppId: (appId: string) => void;
   setSelectedNodeId: (nodeId: string | null) => void;
   setMobilePanelOpen: (isOpen: boolean) => void;
+
   updateNodeMetric: (nodeId: string, metricKey: MetricKey, value: number) => void;
+  updateNodeLabel: (nodeId: string, label: string) => void;
 };
 
 export const useAppStore = create<AppStore>((set) => ({
@@ -50,6 +52,21 @@ export const useAppStore = create<AppStore>((set) => ({
                   ...node.data.metrics,
                   [metricKey]: value,
                 },
+              },
+            }
+          : node,
+      ),
+    })),
+
+  updateNodeLabel: (nodeId: string, label: string) =>
+    set((state) => ({
+      nodes: state.nodes.map((node) =>
+        node.id === nodeId
+          ? {
+              ...node,
+              data: {
+                ...node.data,
+                label,
               },
             }
           : node,
