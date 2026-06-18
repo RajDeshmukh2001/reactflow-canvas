@@ -9,8 +9,8 @@ type MetricControlProps = {
 const MetricControl = ({ value }: MetricControlProps): React.JSX.Element => {
   return (
     <div className="flex items-center gap-4">
-      <Slider defaultValue={[value]} max={100} step={1} className="w-full" />
-      <Input type="number" defaultValue={value} className="w-20" />
+      <Slider value={[value]} max={100} step={1} className="w-full" />
+      <Input type="number" value={value} className="w-20" />
     </div>
   );
 };

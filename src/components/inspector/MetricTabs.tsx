@@ -1,13 +1,14 @@
 import React from 'react';
 import MetricControl from './MetricControl';
-import type { MetricDefinition } from '@/types/node';
+import type { MetricDefinition, NodeMetrics } from '@/types/node';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type MetricTabsProps = {
   metricDefinitions: MetricDefinition[];
+  metrics: NodeMetrics;
 };
 
-const MetricTabs = ({ metricDefinitions }: MetricTabsProps): React.JSX.Element => {
+const MetricTabs = ({ metricDefinitions, metrics }: MetricTabsProps): React.JSX.Element => {
   return (
     <Tabs defaultValue="cpu">
       <TabsList className="w-full border dark:border-0 mb-4">
@@ -23,11 +24,14 @@ const MetricTabs = ({ metricDefinitions }: MetricTabsProps): React.JSX.Element =
         })}
       </TabsList>
 
-      {metricDefinitions.map((metric) => (
-        <TabsContent key={metric.id} value={metric.key}>
-          <MetricControl value={75} />
-        </TabsContent>
-      ))}
+      {metricDefinitions.map((metric) => {
+        const m = metrics[metric.key];
+        return (
+          <TabsContent key={metric.id} value={metric.key}>
+            <MetricControl value={m} />
+          </TabsContent>
+        );
+      })}
     </Tabs>
   );
 };

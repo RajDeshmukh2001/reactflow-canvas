@@ -17,6 +17,7 @@ export type NodeMetrics = Record<MetricKey, number>;
 export type ServiceNodeData = {
   label: string;
   serviceType: string;
+  logoUrl: string;
   status: ServiceStatus;
   description?: string;
   metrics: NodeMetrics;
